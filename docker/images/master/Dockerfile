@@ -9,12 +9,12 @@ ENV BUILD_PACKAGES build-essential
 # install dependencies
 
 RUN apt update && \
-    apt install -y ${BUILD_PACKAGES} git --no-install-recommends && \
-    git clone --depth 1 ${GIT_URL_PERCEVAL} -b ${GIT_REV_PERCEVAL} && \
+    apt install -y build-essential git --no-install-recommends && \
+    git clone --depth 1 https://github.com/grimoirelab/perceval.git -b master && \
     pip3 install -r perceval/requirements.txt perceval/ && \
-    apt remove --purge -y ${BUILD_PACKAGES} && \
+    apt remove --purge -y build-essential && \
     apt clean && \
-    apt autoremove --purge -y
-    #find /var/lib/apt/lists -type f -delete
+    apt autoremove --purge -y && \
+    find /var/lib/apt/lists -type f -delete
 
 ENTRYPOINT ["/usr/local/bin/perceval"]
