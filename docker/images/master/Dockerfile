@@ -14,7 +14,7 @@ RUN apt update && \
     pip3 install -r perceval/requirements.txt perceval/ && \
     apt remove --purge -y ${BUILD_PACKAGES} && \
     apt clean && \
-    apt autoremove --purge -y && \
-    find /var/lib/apt/lists -type f -delete
+    apt autoremove --purge -y
+    #find /var/lib/apt/lists -type f -delete
 
 ENTRYPOINT ["/usr/local/bin/perceval"]
